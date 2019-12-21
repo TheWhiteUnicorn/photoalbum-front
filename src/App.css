@@ -36,3 +36,23 @@
     transform: rotate(360deg);
   }
 }
+
+.reg-modal-label {
+  white-space: nowrap;
+}
+
+.padding-reg-input {
+  padding-bottom: 20px;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  padding-left: 100px;
+  width: 100%;
+}
+
+.card_name {
+  display: flex;
+  justify-content: space-between;
+}

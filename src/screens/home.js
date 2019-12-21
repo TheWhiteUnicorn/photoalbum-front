@@ -5,6 +5,12 @@ import AlbumsList from "../components/albumsList";
 import PhotosList from "../components/photosList";
 import AddAlbumModal from "../components/addAlbumModal";
 
+import axios from 'axios';
+import RegisterModal from "../components/regUserModal";
+import {getUser} from "../store/action/actions";
+
+import {connect} from "react-redux";
+
 
 class Home extends React.Component {
     constructor(props) {
@@ -13,13 +19,25 @@ class Home extends React.Component {
         this.state = {
             displayMode: 'albums',
             showAddAlbumModal: false,
+            showRegistrationModal: false,
         }
     }
+
+    componentDidMount() {
+        this.getUserData();
+    }
+
+    getUserData = () => {
+      this.props.getUser();
+    };
 
     onChangeDisplayMode = value => this.setState({displayMode: value});
 
     onAddAlbum = () => this.setState({showAddAlbumModal: true});
     onCloseAddAlbumModal = () => this.setState({showAddAlbumModal: false});
+
+    onRegistration = () => this.setState({showRegistrationModal: true});
+    onCloseRegistrationModal = () => this.setState({showRegistrationModal: false});
 
 
     render() {
@@ -30,10 +48,13 @@ class Home extends React.Component {
                 <Container>
                     <Row className={'top-toolbar'}>
                         <Col xs={1}>
-                            <Image
-                                className='user-avatar'
-                                src='https://greendestinations.org/wp-content/uploads/2019/05/avatar-exemple.jpg'
-                                roundedCircle/>
+                            <div onClick={this.onRegistration}>
+                                <Image
+                                    className='user-avatar'
+                                    src='https://greendestinations.org/wp-content/uploads/2019/05/avatar-exemple.jpg'
+                                    roundedCircle
+                                />
+                            </div>
                         </Col>
                         <Col>
                             {displayMode === 'albums' && <Button onClick={this.onAddAlbum}>Добавить альбом</Button>}
@@ -58,9 +79,24 @@ class Home extends React.Component {
                     </Row>
                 </Container>
                 <AddAlbumModal show={this.state.showAddAlbumModal} onClose={this.onCloseAddAlbumModal}/>
+                <RegisterModal show={this.state.showRegistrationModal} getUserData={this.getUserData} onClose={this.onCloseRegistrationModal}/>
             </div>
         )
     }
 }
 
-export default Home;
+
+
+function mapStateToProps (state) {
+    return {
+        userInfo: state.getUserInfoReducer,
+    };
+}
+
+const mapDispatchToProps = {
+    getUser,
+};
+
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
