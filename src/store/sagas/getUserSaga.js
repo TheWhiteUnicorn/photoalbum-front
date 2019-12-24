@@ -5,6 +5,7 @@ import {
     GET_USER_SUCCESS,
     GET_USER_ERROR,
 } from "../constants/actions-types";
+import {baseUrl} from "./index";
 
 export default function* watcherSaga() {
     yield takeEvery(GET_USER_REQUEST, workerSaga);
@@ -13,8 +14,10 @@ export default function* watcherSaga() {
 function* workerSaga(action) {
     try {
         console.log(action.payload);
-        const { data } = yield call(axios, 'https://c31a5cbc.ngrok.io/rest-auth/user/', {
+        const { data } = yield call(axios,  {
+            url: `${baseUrl}rest-auth/user/`,
             method: 'get',
+            headers: {Authorization: `Token ce568b17acc66e8fb93b6fbe2eb7effff144d164`},
         });
         yield  put({ type: GET_USER_SUCCESS, payload: data });
     } catch (e) {
