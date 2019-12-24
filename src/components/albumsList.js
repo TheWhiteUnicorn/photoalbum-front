@@ -8,6 +8,8 @@ import IconButton from "@material-ui/core/IconButton";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
+import {getAlbums, getUser} from "../store/action/actions";
+import {connect} from "react-redux";
 
 const options = [
     'Удалить',
@@ -24,7 +26,6 @@ class AlbumsList extends React.Component {
             open: false,
         }
     }
-    list = [1, 2, 3, 4, 5];
 
     handleClick = event => {
         this.setState({
@@ -42,22 +43,22 @@ class AlbumsList extends React.Component {
 
 
     render() {
-        const {onCardClick} = this.props;
+        const {onCardClick, albums} = this.props;
         const {anchorEl, open} = this.state;
 
         return (<div>
             <Container>
                 <CardColumns>
-                    {this.list.map(()=>(
+                    {albums && albums.map((album)=>(
                             <Card onClick={onCardClick}>
-                                <Link to={'/albums/1488'}>
-                                    <Card.Img variant="top" src="https://static.boredpanda.com/blog/wp-content/uploads/2019/02/sony-world-photography-awards-2019-14-5c61944526bfd__880.jpg"/>
+                                <Link to={`/albums/${album.id}`}>
+                                    <Card.Img variant="top" src={album.cover ? album.cover : 'https://semantic-ui.com/images/wireframe/image.png'}/>
                                 </Link>
                                 <Card.Body className='card_name'>
-                                    <Link to={'/albums/1488'}>
-                                        <Card.Title>Album name</Card.Title>
+                                    <Link to={`/albums/${album.id}`}>
+                                        <Card.Title>{album.name}</Card.Title>
                                     </Link>
-                                    <div>
+                                    {album.owned_by_current && <div>
                                         <IconButton
                                             aria-label="more"
                                             aria-controls="long-menu"
@@ -85,7 +86,7 @@ class AlbumsList extends React.Component {
                                                 </MenuItem>
                                             ))}
                                         </Menu>
-                                    </div>
+                                    </div>}
                                 </Card.Body>
                             </Card>
                     ))
@@ -96,4 +97,4 @@ class AlbumsList extends React.Component {
     }
 }
 
-export default AlbumsList;
+export default AlbumsList

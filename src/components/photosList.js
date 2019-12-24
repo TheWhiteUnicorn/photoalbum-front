@@ -31,7 +31,6 @@ class PhotosList extends React.Component {
             open: false,
         }
     }
-    list = [1, 2, 3, 4, 5];
 
     handleClick = event => {
         this.setState({
@@ -50,24 +49,21 @@ class PhotosList extends React.Component {
 
 
     render() {
-        const {onCardClick} = this.props;
+        const {photos, onCardClick} = this.props;
         const {anchorEl, open} = this.state;
         return (<div>
             <Container>
                 <CardColumns>
-                    {this.list.map((id) => (
+                    {photos && photos.map((photo) => (
                             <Card onClick={onCardClick}>
-                                <Link to={'/photos/1488'}>
-                                    <Card.Img
-                                        variant="top"
-                                        src="https://static.boredpanda.com/blog/wp-content/uploads/2019/02/sony-world-photography-awards-2019-14-5c61944526bfd__880.jpg"
-                                    />
+                                <Link to={`/photos/${photo.id}`}>
+                                    <Card.Img variant="top" src={photo.image ? photo.image : 'https://semantic-ui.com/images/wireframe/image.png'}/>
                                 </Link>
                                 <Card.Body className='card_name'>
-                                    <Link to={'/photos/1488'}>
-                                        <Card.Title>Photo name</Card.Title>
+                                    <Link to={`/photos/${photo.id}`}>
+                                        <Card.Title>{photo.name}</Card.Title>
                                     </Link>
-                                    <div>
+                                    {photo.owned_by_current && <div>
                                         <IconButton
                                             aria-label="more"
                                             aria-controls="long-menu"
@@ -95,7 +91,7 @@ class PhotosList extends React.Component {
                                                 </MenuItem>
                                             ))}
                                         </Menu>
-                                    </div>
+                                    </div>}
                                 </Card.Body>
                             </Card>
                     ))

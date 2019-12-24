@@ -6,12 +6,10 @@ import PhotosList from "../components/photosList";
 import AddAlbumModal from "../components/addAlbumModal";
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-// import Button  from '@material-ui/core/Button';
 
 
-import axios from 'axios';
 import RegisterModal from "../components/regUserModal";
-import {getUser} from "../store/action/actions";
+import {getAlbums, getPhotosAll, getUser} from "../store/action/actions";
 
 import {connect} from "react-redux";
 
@@ -30,6 +28,7 @@ class Home extends React.Component {
 
     componentDidMount() {
         this.getUserData();
+        this.props.getAlbums()
     }
 
     getUserData = () => {
@@ -48,7 +47,11 @@ class Home extends React.Component {
         });
     };
 
-    onChangeDisplayMode = value => this.setState({displayMode: value});
+    onChangeDisplayMode = value => {
+        const {getPhotosAll} = this.props;
+        getPhotosAll();
+        this.setState({displayMode: value});
+    };
 
     onAddAlbum = () => this.setState({showAddAlbumModal: true});
     onCloseAddAlbumModal = () => this.setState({showAddAlbumModal: false});
@@ -64,6 +67,7 @@ class Home extends React.Component {
 
     render() {
         const {displayMode, menu} = this.state;
+        const {albums: {albums}, photos: {photos}} = this.props;
 
         return (
             <div>
@@ -109,8 +113,8 @@ class Home extends React.Component {
                     </Row>
                     <Row>
                         {displayMode === 'albums'?
-                            <AlbumsList onCardClick={this.onAlbumClick}/>
-                            : <PhotosList/>
+                            <AlbumsList albums={albums}/>
+                            : <PhotosList photos={photos}/>
                         }
                     </Row>
                 </Container>
@@ -122,17 +126,18 @@ class Home extends React.Component {
 }
 
 
-
 function mapStateToProps (state) {
     return {
         userInfo: state.getUserInfoReducer,
+        albums: state.albums,
+        photos: state.photos,
     };
 }
 
 const mapDispatchToProps = {
     getUser,
+    getAlbums,
+    getPhotosAll,
 };
-
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
