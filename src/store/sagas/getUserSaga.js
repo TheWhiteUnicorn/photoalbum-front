@@ -17,7 +17,7 @@ function* workerSaga(action) {
         const { data } = yield call(axios,  {
             url: `${baseUrl}rest-auth/user/`,
             method: 'get',
-            headers: {Authorization: `Token ce568b17acc66e8fb93b6fbe2eb7effff144d164`},
+            headers: { Authorization: `Token ${action.payload}` },
         });
         yield  put({ type: GET_USER_SUCCESS, payload: data });
     } catch (e) {

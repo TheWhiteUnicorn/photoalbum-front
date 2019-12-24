@@ -8,10 +8,9 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 // import Button  from '@material-ui/core/Button';
 
-
-import axios from 'axios';
 import RegisterModal from "../components/regUserModal";
-import {getUser} from "../store/action/actions";
+import LoginModal from "../components/loginUserModal";
+import { getUser, deleteUserData } from "../store/action/actions";
 
 import {connect} from "react-redux";
 
@@ -24,17 +23,10 @@ class Home extends React.Component {
             displayMode: 'albums',
             showAddAlbumModal: false,
             showRegistrationModal: false,
+            showLoginModal: false,
             menu: null,
         }
     }
-
-    componentDidMount() {
-        this.getUserData();
-    }
-
-    getUserData = () => {
-      this.props.getUser();
-    };
 
     handleClickMenu = event => {
         this.setState({
@@ -59,11 +51,29 @@ class Home extends React.Component {
             menu: null,
         });
     };
-    onCloseRegistrationModal = () => this.setState({showRegistrationModal: false});
 
+    onLogin = () => {
+        this.setState({
+            showLoginModal: true,
+            menu: null,
+        });
+    };
+
+    onLogoutHandle = async () => {
+      const { keyUser, deleteUserData } = this.props;
+      try {
+          await deleteUserData(keyUser);
+          this.handleClose();
+      } catch (e) {
+          return;
+      }
+    };
+    onCloseRegistrationModal = () => this.setState({showRegistrationModal: false});
+    onCloseLoginModal = () => this.setState({showLoginModal: false});
 
     render() {
         const {displayMode, menu} = this.state;
+        const { userInfo } = this.props;
 
         return (
             <div>
@@ -85,9 +95,9 @@ class Home extends React.Component {
                                     open={Boolean(menu)}
                                     onClose={this.handleClose}
                                 >
-                                    <MenuItem onClick={this.onRegistration}>Sign Up</MenuItem>
-                                    <MenuItem onClick={this.handleClose}>Log in</MenuItem>
-                                    <MenuItem onClick={this.handleClose}>Logout</MenuItem>
+                                    {!userInfo && <MenuItem onClick={this.onRegistration}>Sign Up</MenuItem>}
+                                    {!userInfo && <MenuItem onClick={this.onLogin}>Log in</MenuItem>}
+                                    {userInfo && <MenuItem onClick={this.onLogoutHandle}>Logout</MenuItem>}
                                 </Menu>
                             </div>
 
@@ -115,7 +125,9 @@ class Home extends React.Component {
                     </Row>
                 </Container>
                 <AddAlbumModal show={this.state.showAddAlbumModal} onClose={this.onCloseAddAlbumModal}/>
-                <RegisterModal show={this.state.showRegistrationModal} getUserData={this.getUserData} onClose={this.onCloseRegistrationModal}/>
+                <RegisterModal show={this.state.showRegistrationModal} onClose={this.onCloseRegistrationModal}/>
+                <LoginModal show={this.state.showLoginModal} onClose={this.onCloseLoginModal}/>
+
             </div>
         )
     }
@@ -125,14 +137,14 @@ class Home extends React.Component {
 
 function mapStateToProps (state) {
     return {
-        userInfo: state.getUserInfoReducer,
+        userInfo: state.getUserInfoReducer.userInfo,
+        keyUser: state.saveUserInfoReducer.key,
     };
 }
 
 const mapDispatchToProps = {
     getUser,
+    deleteUserData,
 };
-
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

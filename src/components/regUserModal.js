@@ -1,7 +1,7 @@
 import React from 'react'
 import {Button, Modal, Form, Row, Col} from "react-bootstrap";
 import axios from "axios";
-import {postRegister} from "../store/action/actions";
+import { postRegister, getUser } from "../store/action/actions";
 import {connect} from "react-redux";
 
 
@@ -38,14 +38,14 @@ class RegisterModal extends React.Component {
                     pass2: pass2,
                     email: email,
                 };
-                console.log(data, 14882280);
                 try {
                     await this.props.postRegister(data);
                     this.setState( { userName:'', pass1:'', email: '', pass2: '' });
                     this.props.onClose();
-                    this.props.getUserData();
+                    this.props.getUser(this.props.keyUser);
                 } catch(error) {
                     console.log('Response was failed', error);
+                    this.setState( { userName:'', pass1:'', email: '', pass2: '' });
                 }
             }
         } else {
@@ -123,10 +123,17 @@ class RegisterModal extends React.Component {
 }
 
 
+function mapStateToProps (state) {
+    return {
+        keyUser: state.saveUserInfoReducer.key,
+    };
+}
+
 
 const mapDispatchToProps = {
     postRegister,
+    getUser
 };
 
 
-export default connect(null, mapDispatchToProps)(RegisterModal);
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterModal);
