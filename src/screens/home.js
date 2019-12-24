@@ -4,6 +4,10 @@ import {Button, Col, Container, Image, Row, ToggleButton, ToggleButtonGroup} fro
 import AlbumsList from "../components/albumsList";
 import PhotosList from "../components/photosList";
 import AddAlbumModal from "../components/addAlbumModal";
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+// import Button  from '@material-ui/core/Button';
+
 
 import axios from 'axios';
 import RegisterModal from "../components/regUserModal";
@@ -20,6 +24,7 @@ class Home extends React.Component {
             displayMode: 'albums',
             showAddAlbumModal: false,
             showRegistrationModal: false,
+            menu: null,
         }
     }
 
@@ -31,30 +36,61 @@ class Home extends React.Component {
       this.props.getUser();
     };
 
+    handleClickMenu = event => {
+        this.setState({
+            menu: event.currentTarget
+        });
+    };
+
+    handleClose = () => {
+        this.setState({
+            menu: null
+        });
+    };
+
     onChangeDisplayMode = value => this.setState({displayMode: value});
 
     onAddAlbum = () => this.setState({showAddAlbumModal: true});
     onCloseAddAlbumModal = () => this.setState({showAddAlbumModal: false});
 
-    onRegistration = () => this.setState({showRegistrationModal: true});
+    onRegistration = () => {
+        this.setState({
+            showRegistrationModal: true,
+            menu: null,
+        });
+    };
     onCloseRegistrationModal = () => this.setState({showRegistrationModal: false});
 
 
     render() {
-        const {displayMode} = this.state;
+        const {displayMode, menu} = this.state;
 
         return (
             <div>
                 <Container>
                     <Row className={'top-toolbar'}>
                         <Col xs={1}>
-                            <div onClick={this.onRegistration}>
-                                <Image
-                                    className='user-avatar'
-                                    src='https://greendestinations.org/wp-content/uploads/2019/05/avatar-exemple.jpg'
-                                    roundedCircle
-                                />
+                            <div>
+                                <div aria-controls="simple-menu" aria-haspopup="true" onClick={this.handleClickMenu}>
+                                    <Image
+                                        className='user-avatar'
+                                        src='https://greendestinations.org/wp-content/uploads/2019/05/avatar-exemple.jpg'
+                                        roundedCircle
+                                    />
+                                </div>
+                                <Menu
+                                    id="simple-menu"
+                                    anchorEl={menu}
+                                    keepMounted
+                                    open={Boolean(menu)}
+                                    onClose={this.handleClose}
+                                >
+                                    <MenuItem onClick={this.onRegistration}>Sign Up</MenuItem>
+                                    <MenuItem onClick={this.handleClose}>Log in</MenuItem>
+                                    <MenuItem onClick={this.handleClose}>Logout</MenuItem>
+                                </Menu>
                             </div>
+
                         </Col>
                         <Col>
                             {displayMode === 'albums' && <Button onClick={this.onAddAlbum}>Добавить альбом</Button>}

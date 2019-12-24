@@ -19,13 +19,15 @@ class RegisterModal extends React.Component {
         }
     }
 
-    handleSubmitBtn = () => {
+    handleSubmitBtn = async () => {
         let email = this.state.email.replace(/^\s+|\s+$/g, '');
         let pass1 = this.state.pass1.replace(/^\s+|\s+$/g, '');
         let pass2 = this.state.pass2.replace(/^\s+|\s+$/g, '');
         let userName = this.state.userName.replace(/^\s+|\s+$/g, '');
+        console.log(pass1.length, pass2.length, userName.length);
         if (pass1.length && pass2.length && userName.length) {
-            if(this.state.pass1 !== this.state.pass2) {
+            if(pass1.toString() !== pass2.toString()) {
+                console.log(pass1, pass2, pass1 === pass2, typeof pass1);
                 this.setState({
                     errorPass: true,
                 });
@@ -36,12 +38,16 @@ class RegisterModal extends React.Component {
                     pass2: pass2,
                     email: email,
                 };
-                this.props.postRegister(data);
-                this.setState( { userName:'', pass1:'', email: '', pass2: '' });
-                this.props.onClose();
-                this.props.getUserData();
+                console.log(data, 14882280);
+                try {
+                    await this.props.postRegister(data);
+                    this.setState( { userName:'', pass1:'', email: '', pass2: '' });
+                    this.props.onClose();
+                    this.props.getUserData();
+                } catch(error) {
+                    console.log('Response was failed', error);
+                }
             }
-
         } else {
             alert('Заполните, пожалуйста все поля');
         }
