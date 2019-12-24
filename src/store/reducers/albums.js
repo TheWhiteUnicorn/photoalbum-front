@@ -14,6 +14,11 @@ const albums = (state = initialState, action) => {
                 albums: action.payload.data,
                 currentAlbum: null,
             };
+        case ActionTypes.SET_CURRENT_ALBUM:
+            return {
+                ...state,
+                currentAlbum: action.albumId,
+            };
         default: return state;
     }
 };

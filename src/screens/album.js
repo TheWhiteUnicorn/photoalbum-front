@@ -3,12 +3,21 @@ import {Button, Col, Container, Image, Row, ToggleButton, ToggleButtonGroup} fro
 
 import PhotosList from "../components/photosList";
 import AddPhotoModal from "../components/addPhotoModal";
+import {getAlbumPhotos, getAlbums, getPhotosAll, getUser, setCurrentAlbum} from "../store/action/actions";
+import {connect} from "react-redux";
 
 
 class Album extends React.Component {
     state = {
         showAddPhotoModal: false
     };
+
+    componentDidMount() {
+        const {setCurrentAlbum, getAlbums, getAlbumPhotos, match: {params: id}} = this.props;
+        setCurrentAlbum(id);
+        getAlbums();
+        getAlbumPhotos();
+    }
 
     onAddPhoto = () => this.setState({showAddPhotoModal: true});
     onCloseAddPhotoModal = () => this.setState({showAddPhotoModal: false});
@@ -41,4 +50,18 @@ class Album extends React.Component {
     }
 }
 
-export default Album;
+function mapStateToProps (state) {
+    return {
+        userInfo: state.getUserInfoReducer,
+        albums: state.albums,
+        photos: state.photos,
+    };
+}
+
+const mapDispatchToProps = {
+    setCurrentAlbum,
+    getAlbums,
+    getAlbumPhotos,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Album);

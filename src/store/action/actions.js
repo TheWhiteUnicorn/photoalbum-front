@@ -21,10 +21,25 @@ export function getAlbums() {
     }
 }
 
+export function setCurrentAlbum(albumId) {
+    return {
+        type: ActionTypes.SET_CURRENT_ALBUM,
+        albumId,
+    }
+}
+
 export function getPhotosAll() {
     return {
         type: ActionTypes.GET_PHOTOS_REQUEST,
         mode: PHOTO_FETCH_MODE.ALL,
+    }
+}
+
+export function getAlbumPhotos(albumId) {
+    return {
+        type: ActionTypes.GET_PHOTOS_REQUEST,
+        mode: PHOTO_FETCH_MODE.ALBUM,
+        albumId
     }
 }
 
