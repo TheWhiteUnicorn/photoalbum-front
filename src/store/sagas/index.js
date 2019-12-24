@@ -3,8 +3,11 @@ import * as axios from "axios";
 
 import getUserSaga from "./getUserSaga";
 import registrationSaga from "./registrationSaga";
+import logoutSaga from "./logoutSaga";
+
 import albumsSaga from "./albumsSaga";
 import photosSaga from "./photosSaga";
+
 
 export const baseUrl = 'http://192.168.1.133:5001/';
 
@@ -16,5 +19,6 @@ export default function* rootSaga() {
         fork(registrationSaga),
         fork(albumsSaga),
         fork(photosSaga),
+        fork(logoutSaga),
     ]);
 }

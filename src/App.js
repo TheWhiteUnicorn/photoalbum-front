@@ -8,12 +8,17 @@ import Home from './screens/home'
 import Album from "./screens/album";
 import Photo from "./screens/photo";
 
-import { getUser } from "./store/action/actions";
+import { getUser, saveUserKey } from "./store/action/actions";
 import store from "./store/store";
 
 class App extends Component {
-    componentDidMount() {
-        this.props.getUser();
+   async componentDidMount () {
+        const { getUser, saveUserKey } = this.props;
+        const key = await localStorage.getItem('key');
+        if(key) {
+            await saveUserKey(key);
+            await getUser(key);
+        }
     }
     render() {
         return (
@@ -37,6 +42,7 @@ class App extends Component {
 
 const mapDispatchToProps = {
     getUser,
+    saveUserKey,
 };
 
 export default connect(null, mapDispatchToProps)(App);

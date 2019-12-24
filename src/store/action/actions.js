@@ -50,3 +50,24 @@ export function getPhotosAlbum(albumId) {
         albumId
     }
 }
+
+export function saveUserKey(data) {
+    return {
+        type: ActionTypes.SAVE_USER_KEY,
+        payload: data,
+    }
+}
+
+export function deleteUserData(data) {
+    return {
+        type: ActionTypes.DELETE_USER_DATA_REQUEST,
+        payload: data,
+    }
+}
+
+export function postLogin(data) {
+    return {
+        type: ActionTypes.LOGIN_USER_REQUEST,
+        payload: data,
+    }
+}
