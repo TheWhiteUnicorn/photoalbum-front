@@ -22,6 +22,7 @@ class AlbumsList extends React.Component {
         this.state = {
             anchorEl: null,
             open: false,
+            openForAlbumId: null,
         }
     }
 
@@ -32,6 +33,12 @@ class AlbumsList extends React.Component {
             open: event.currentTarget,
         });
 
+    };
+
+    handleOpenMenu = (event, albumId) => {
+        this.setState({
+            openForAlbumId: albumId,
+        });
     };
 
     handleClose = () => {
@@ -67,7 +74,7 @@ class AlbumsList extends React.Component {
                                             aria-label="more"
                                             aria-controls={`long-menu${album.id}`}
                                             aria-haspopup="true"
-                                            onClick={this.handleClick}
+                                            onClick={event => this.handleOpenMenu(event, album.id)}
                                         >
                                             <MoreVertIcon />
                                         </IconButton>
@@ -87,7 +94,6 @@ class AlbumsList extends React.Component {
                                             {options.map((option, index) => (
                                                 <MenuItem
                                                     key={option}
-                                                    // selected={option === 'Редактировать'}
                                                     onClick={event => this.handleClick(event, index)}>
                                                     {option}
                                                 </MenuItem>

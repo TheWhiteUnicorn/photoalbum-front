@@ -58,9 +58,15 @@ render() {
                             Название
                         </Form.Label>
                         <Col sm="10">
-                            <Form.Control type="text" name='albumName' value={albumName} onChange={this.handleChangeInput}/>
+                            <Form.Control type="text"
+                                          name='albumName'
+                                          value={albumName}
+                                          isInvalid={!albumName}
+                                          onChange={this.handleChangeInput}/>
+                            <Form.Control.Feedback type="invalid">
+                                Заполните поле название!
+                            </Form.Control.Feedback>
                         </Col>
-                        {!albumName && <Form.Text className='error-message'>заполните поле название!</Form.Text>}
 
                     </Form.Group>
                 </Modal.Body>
