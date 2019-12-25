@@ -39,6 +39,7 @@ class LoginModal extends React.Component {
             } catch(error) {
                 console.log('Response was failed', error);
                 this.setState( { userName:'', pass1:'' });
+                alert('Введены неправильные данные!');
             }
 
         } else {

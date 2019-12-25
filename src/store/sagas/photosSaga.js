@@ -13,9 +13,15 @@ export default function* watcherSaga() {
 
 function* fetchPhotos(action) {
     try {
+        const token = localStorage.getItem('key');
         let url;
         if (action.mode === PHOTO_FETCH_MODE.ALL) url = `${baseUrl}photos/`;
-        const payload = yield call(axios.get, url);
+        const config = {
+            url,
+            method: 'GET',
+            headers: { Authorization: `Token ${token}`},
+        };
+        const payload = yield call(axios, config);
         yield put({type: ActionTypes.GET_PHOTOS_RESPONSE, status: RESPONSE_STATUSES.SUCCESS, payload});
     } catch (e) {
         yield put({type: ActionTypes.GET_PHOTOS_RESPONSE, status: RESPONSE_STATUSES.FAIL, message: e.message});
