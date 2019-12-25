@@ -4,10 +4,12 @@ import {
     Container,
 } from "react-bootstrap";
 import {Link} from "react-router-dom";
+
 import IconButton from "@material-ui/core/IconButton";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
+
 import { deleteAlbum } from "../store/action/actions";
 import {connect} from "react-redux";
 import AddAlbumModal from "./addAlbumModal";
@@ -26,12 +28,13 @@ class AlbumsList extends React.Component {
         this.state = {
             anchorEl: null,
             open: false,
+            openForAlbumId: null,
             showAddAlbumModal: false,
         }
     }
 
-    handleClick = (event, index) => {
-        console.log(index, 54646465465, event.target.id);
+    handleClick = async (event, index) => {
+        console.log(index, this.state.openForAlbumId, 2222222222);
         this.setState({
             anchorEl: event.currentTarget,
             open: event.currentTarget,
@@ -41,16 +44,24 @@ class AlbumsList extends React.Component {
             case 0:
                 const isAdmin = window.confirm("Удалить?");
                 if(isAdmin) {
-                    //this.props.deleteAlbum();
+                   await this.props.deleteAlbum(this.state.openForAlbumId);
+                   this.handleClose();
                 } else {
                     return;
                 }
                 break;
-            case 1:
-                this.onAddAlbum();
+            case 1: this.onAddAlbum();
                 break;
         }
 
+    };
+
+    handleOpenMenu = (event, albumId) => {
+        this.setState({
+            openForAlbumId: albumId,
+            anchorEl: event.currentTarget,
+            open: event.currentTarget,
+        });
     };
 
     handleClose = () => {
@@ -71,7 +82,7 @@ class AlbumsList extends React.Component {
         return (<div>
             <Container>
                 <CardColumns>
-                    {albums && albums.map((album, albomindex)=>(
+                    {albums && albums.map((album)=>(
                             <Card key={album.id} onClick={onCardClick}>
                                 <Link to={`/albums/${album.id}`}>
                                     <Card.Img
@@ -89,7 +100,7 @@ class AlbumsList extends React.Component {
                                             aria-label="more"
                                             aria-controls={`long-menu${album.id}`}
                                             aria-haspopup="true"
-                                            onClick={this.handleClick}
+                                            onClick={event => this.handleOpenMenu(event, album.id)}
                                         >
                                             <MoreVertIcon />
                                         </IconButton>
@@ -108,12 +119,8 @@ class AlbumsList extends React.Component {
                                         >
                                             {options.map((option, index) => (
                                                 <MenuItem
-                                                    id={album.id}
                                                     key={option}
-                                                    // selected={option === 'Редактировать'}
-                                                    onClick={event => this.handleClick(event, index)}
-                                                >
-
+                                                    onClick={event => this.handleClick(event, index)}>
                                                     {option}
                                                 </MenuItem>
                                             ))}
@@ -125,7 +132,7 @@ class AlbumsList extends React.Component {
                     }
                 </CardColumns>
             </Container>
-            <AddAlbumModal show={this.state.showAddAlbumModal} editMode={true} onClose={this.onCloseAddAlbumModal}/>
+            <AddAlbumModal show={this.state.showAddAlbumModal} editMode={true} id={this.state.openForAlbumId} onClose={this.onCloseAddAlbumModal}/>
         </div>)
     }
 }

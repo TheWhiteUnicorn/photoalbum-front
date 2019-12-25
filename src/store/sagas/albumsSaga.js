@@ -54,7 +54,7 @@ function* deleteAlbum(action) {
     console.log(action);
 
     try {
-        const url = `${baseUrl}albums/${action.payload}`;
+        const url = `${baseUrl}albums/${action.payload}/`;
         const token = localStorage.getItem('key');
         const config = {
             url,
@@ -74,15 +74,14 @@ function* editAlbum(action) {
     console.log(action);
 
     try {
-        const url = `${baseUrl}albums/${action.payload.id}`;
+        const url = `${baseUrl}albums/${action.payload.id}/`;
         const token = localStorage.getItem('key');
         const config = {
             url,
-            method: 'UPDATE',
+            method: 'PATCH',
             headers: token && { Authorization: `Token ${token}`},
             data: {
                 name: action.payload.name,
-                password: action.payload.pass1,
             }
         };
         const payload = yield call(axios, config);

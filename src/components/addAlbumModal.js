@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, Modal, Form, Row, Col} from "react-bootstrap";
 
-import { createAlbum } from "../store/action/actions";
+import { createAlbum, editAlbum } from "../store/action/actions";
 import { connect } from "react-redux";
 
 class AddAlbumModal extends React.Component {
@@ -42,8 +42,31 @@ class AddAlbumModal extends React.Component {
         }
     };
 
-    handleEditAlbum = () => {
-      console.log('ЩАС ИЗМЕНЮ ИДИ НАХУЙ');
+    handleEditAlbum = async () => {
+        let albumName = this.state.albumName.replace(/^\s+|\s+$/g, '');
+        const { editAlbum, id } = this.props;
+        if(albumName.length) {
+            this.setState({
+                nameError: false,
+            });
+            const data = {
+                id: id,
+                name: albumName,
+            };
+            try {
+                await editAlbum(data);
+                this.props.onClose();
+                this.setState( { albumName: ''});
+            } catch {
+                alert('Не удалось отредактировать альбом');
+            }
+
+        } else {
+            this.setState({
+                nameError: true,
+            })
+        }
+
     };
 
 render() {
@@ -64,9 +87,15 @@ render() {
                             Название
                         </Form.Label>
                         <Col sm="10">
-                            <Form.Control type="text" name='albumName' value={albumName} onChange={this.handleChangeInput}/>
+                            <Form.Control type="text"
+                                          name='albumName'
+                                          value={albumName}
+                                          isInvalid={!albumName}
+                                          onChange={this.handleChangeInput}/>
+                            <Form.Control.Feedback type="invalid">
+                                Заполните поле название!
+                            </Form.Control.Feedback>
                         </Col>
-                        {!albumName && <Form.Text className='error-message'>заполните поле название!</Form.Text>}
 
                     </Form.Group>
                 </Modal.Body>
@@ -99,6 +128,7 @@ function mapStateToProps (state) {
 
 const mapDispatchToProps = {
     createAlbum,
+    editAlbum,
 };
 
 
