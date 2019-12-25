@@ -57,6 +57,13 @@ export function getPhotosAll() {
     }
 }
 
+export function createPhoto(data) {
+    return {
+        type: ActionTypes.CREATE_PHOTO_REQUEST,
+        payload: data,
+    }
+}
+
 export function getAlbumPhotos(albumId) {
     return {
         type: ActionTypes.GET_PHOTOS_REQUEST,
