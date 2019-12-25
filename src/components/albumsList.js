@@ -25,8 +25,8 @@ class AlbumsList extends React.Component {
         }
     }
 
-    handleClick = event => {
-        console.log(event);
+    handleClick = (event, index) => {
+        console.log(index);
         this.setState({
             anchorEl: event.currentTarget,
             open: event.currentTarget,
@@ -84,11 +84,11 @@ class AlbumsList extends React.Component {
                                                 },
                                             }}
                                         >
-                                            {options.map(option => (
+                                            {options.map((option, index) => (
                                                 <MenuItem
                                                     key={option}
                                                     // selected={option === 'Редактировать'}
-                                                    onClick={this.handleClick}>
+                                                    onClick={event => this.handleClick(event, index)}>
                                                     {option}
                                                 </MenuItem>
                                             ))}
