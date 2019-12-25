@@ -85,3 +85,11 @@ export function postLogin(data) {
         payload: data,
     }
 }
+
+export function createComment(text, photoId) {
+    return {
+        type: ActionTypes.CREATE_COMMENT_REQUEST,
+        text,
+        photoId: Number(photoId)
+    }
+}

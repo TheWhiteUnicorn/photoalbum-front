@@ -1,7 +1,7 @@
 import React from 'react'
 import {Button, Card, Col, Container, Form, Image, Row} from "react-bootstrap";
 import Comment from "../components/comment";
-import {getPhotosAll, setCurrentPhoto} from "../store/action/actions";
+import {createComment, getPhotosAll, setCurrentPhoto} from "../store/action/actions";
 import {connect} from "react-redux";
 
 
@@ -22,20 +22,19 @@ class Photo extends React.Component {
         });
     };
 
-    /*handleAddComment = async () => {
-        let albumName = this.state.newComment.replace(/^\s+|\s+$/g, '');
-        const { createComment } = this.state;
-        if(albumName.length) {
+    handleAddComment = async () => {
+        let commentText = this.state.newComment.replace(/^\s+|\s+$/g, '');
+        const { createComment, currentPhoto } = this.props;
+        if(commentText.length) {
             this.setState({
                 nameError: false,
             });
 
             try {
-                await createAlbum(albumName);
-                this.props.onClose();
-                this.setState( { albumName: ''});
+                await createComment(commentText, currentPhoto.id);
+                this.setState( { newComment: ''});
             } catch {
-                alert('Не удалось создать альбом');
+                alert('Не удалось создать комментарий');
             }
 
         } else {
@@ -43,7 +42,7 @@ class Photo extends React.Component {
                 nameError: true,
             })
         }
-    };*/
+    };
 
     render() {
         const {currentPhoto} = this.props;
@@ -51,8 +50,8 @@ class Photo extends React.Component {
 
         return (
             <div>
-                {currentPhoto && <Container>
-                    <h1 className='mb-5 mt-4'>{currentPhoto.name}</h1>
+                {currentPhoto && <Container className='photo-page-wrapper'>
+                        <h1 className='mb-5 mt-4 photo-page-title'>{currentPhoto.name}</h1>
                     <Image
                         className='photo-main mb-5'
                         src={currentPhoto.image ? currentPhoto.image : 'https://semantic-ui.com/images/wireframe/image.png'}
@@ -62,7 +61,7 @@ class Photo extends React.Component {
                         <Comment data={comment}/>
                     ))
                     }
-                    <Form.Group as={Row} controlId="formPlaintextEmail">
+                    <Form.Group as={Row} controlId="formPlaintextEmail" id='newCommentInputGroup'>
                         <Form.Label column sm="3">
                             Ваш комментарий
                         </Form.Label>
@@ -95,6 +94,7 @@ function mapStateToProps (state) {
 const mapDispatchToProps = {
     setCurrentPhoto,
     getPhotosAll,
+    createComment,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Photo);

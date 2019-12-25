@@ -29,6 +29,14 @@ code {
   width: 50px;
 }
 
+.photo-page-wrapper {
+  width: 700px !important;
+}
+
+.photo-page-title {
+  text-align: center;
+}
+
 .photo-main {
   width: 100%;
 }
@@ -41,11 +49,16 @@ code {
 }
 
 .comment-head {
-  background-color: #007bff;
-  color: white;
+  background-color: rgba(255, 255, 255, 0.22);
+  border: 1px solid rgba(0,0,0,.125);
+  color: #000000;
   padding: 10px;
 }
 
 .comment-body {
   padding: 20px 0;
+}
+
+#newCommentInputGroup {
+  margin-bottom: 100px;
 }

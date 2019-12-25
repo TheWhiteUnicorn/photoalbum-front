@@ -7,6 +7,7 @@ import logoutSaga from "./logoutSaga";
 
 import albumsSaga from "./albumsSaga";
 import photosSaga from "./photosSaga";
+import commentsSaga from "./commentsSaga";
 
 
 export const baseUrl = 'http://192.168.1.133:5001/';
@@ -20,5 +21,6 @@ export default function* rootSaga() {
         fork(albumsSaga),
         fork(photosSaga),
         fork(logoutSaga),
+        fork(commentsSaga),
     ]);
 }
