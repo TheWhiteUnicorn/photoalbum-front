@@ -8,8 +8,6 @@ import IconButton from "@material-ui/core/IconButton";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-import {getAlbums, getUser} from "../store/action/actions";
-import {connect} from "react-redux";
 
 const options = [
     'Удалить',
@@ -50,7 +48,7 @@ class AlbumsList extends React.Component {
             <Container>
                 <CardColumns>
                     {albums && albums.map((album)=>(
-                            <Card onClick={onCardClick}>
+                            <Card key={album.id} onClick={onCardClick}>
                                 <Link to={`/albums/${album.id}`}>
                                     <Card.Img variant="top" src={album.cover ? album.cover : 'https://semantic-ui.com/images/wireframe/image.png'}/>
                                 </Link>
