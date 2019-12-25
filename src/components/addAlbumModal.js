@@ -1,122 +1,109 @@
 import React from 'react';
 import {Button, Modal, Form, Row, Col} from "react-bootstrap";
+import * as yup from 'yup';
 
 import { createAlbum, editAlbum } from "../store/action/actions";
 import { connect } from "react-redux";
+import {Formik} from "formik";
+
+import {validateAlbumForm} from '../utils/validators/albumValidator'
+
+const schema = yup.object({
+    albumName: yup.string().required(),
+});
 
 class AddAlbumModal extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             albumName: '',
+            nameTouched: false,
             nameError: false,
         }
     }
 
-
-    handleChangeInput = (e) => {
-        this.setState({
-            [e.target.name]: e.target.value
-        });
-    };
-
-    handleAddNewAlbum = async () => {
-        let albumName = this.state.albumName.replace(/^\s+|\s+$/g, '');
+    handleAddNewAlbum = async (formData) => {
         const { createAlbum } = this.props;
-        if(albumName.length) {
-            this.setState({
-                nameError: false,
-            });
+        let albumName = formData.albumName;
+
             try {
                 await createAlbum(albumName);
                 this.props.onClose();
-                this.setState( { albumName: ''});
             } catch {
                 alert('Не удалось создать альбом');
             }
-
-        } else {
-            this.setState({
-                nameError: true,
-            })
-        }
     };
 
-    handleEditAlbum = async () => {
-        let albumName = this.state.albumName.replace(/^\s+|\s+$/g, '');
+    handleEditAlbum = async (formData) => {
         const { editAlbum, id } = this.props;
-        if(albumName.length) {
-            this.setState({
-                nameError: false,
-            });
-            const data = {
-                id: id,
-                name: albumName,
-            };
-            try {
-                await editAlbum(data);
-                this.props.onClose();
-                this.setState( { albumName: ''});
-            } catch {
-                alert('Не удалось отредактировать альбом');
-            }
+        let albumName = formData.albumName;
 
-        } else {
-            this.setState({
-                nameError: true,
-            })
+        const data = {
+            id: id,
+            name: albumName,
+        };
+        try {
+            await editAlbum(data);
+            this.props.onClose();
+        } catch {
+            alert('Не удалось отредактировать альбом');
         }
-
     };
 
 render() {
     const { show, onClose, editMode } = this.props;
-    const { albumName } = this.state;
     return (
         <>
             <Modal show={show} onHide={onClose}>
-                <Modal.Header closeButton>
-                    {editMode ?
-                        <Modal.Title>Редактирование</Modal.Title>:
-                        <Modal.Title>Создание альбома</Modal.Title>
-                    }
-                </Modal.Header>
-                <Modal.Body>
-                    <Form.Group as={Row} controlId="formAlbumTitle">
-                        <Form.Label column sm="2">
-                            Название
-                        </Form.Label>
-                        <Col sm="10">
-                            <Form.Control type="text"
-                                          name='albumName'
-                                          value={albumName}
-                                          isInvalid={!albumName}
-                                          onChange={this.handleChangeInput}/>
-                            <Form.Control.Feedback type="invalid">
-                                Заполните поле название!
-                            </Form.Control.Feedback>
-                        </Col>
-
-                    </Form.Group>
-                </Modal.Body>
-                <Modal.Footer>
-                    {editMode ?
-                        <Button variant="primary" onClick={this.handleEditAlbum}>
-                            Ок
-                        </Button>
-                        :
-                        <Button variant="primary" onClick={this.handleAddNewAlbum}>
-                            Ок
-                        </Button>
-                    }
-                </Modal.Footer>
+                <Formik
+                    onSubmit={editMode ? this.handleEditAlbum : this.handleAddNewAlbum}
+                    initialValues={{
+                        albumName: ''
+                    }}
+                    validate={validateAlbumForm}
+                >
+                    {({
+                          handleSubmit,
+                          handleChange,
+                          handleBlur,
+                          values,
+                          touched,
+                          isValid,
+                          errors,
+                      }) => (
+                        <Form noValidate onSubmit={handleSubmit}>
+                            <Modal.Header closeButton>
+                                {editMode ?
+                                    <Modal.Title>Редактирование</Modal.Title>:
+                                    <Modal.Title>Создание альбома</Modal.Title>
+                                }
+                            </Modal.Header>
+                            <Modal.Body>
+                                <Form.Group as={Row} controlId="formAlbumTitle">
+                                    <Form.Label column sm="2">Название</Form.Label>
+                                    <Col sm="10">
+                                        <Form.Control type="text"
+                                                      name='albumName'
+                                                      value={values.albumName}
+                                                      isInvalid={errors.albumName}
+                                                      onChange={handleChange}/>
+                                        <Form.Control.Feedback type="invalid">
+                                            Это поле обязательное
+                                        </Form.Control.Feedback>
+                                    </Col>
+                                </Form.Group>
+                            </Modal.Body>
+                            <Modal.Footer>
+                                    <Button type="submit" variant="primary">Ок</Button>
+                            </Modal.Footer>
+                        </Form>
+                    )}
+                </Formik>
             </Modal>
         </>
     )
 }
-
 }
-
 
 
 function mapStateToProps (state) {
@@ -133,3 +120,6 @@ const mapDispatchToProps = {
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddAlbumModal);
+
+
+

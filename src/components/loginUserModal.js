@@ -4,6 +4,8 @@ import {Button, Modal, Form, Row, Col} from "react-bootstrap";
 import { postLogin, getUser } from "../store/action/actions";
 
 import {connect} from "react-redux";
+import {validateAlbumForm} from "../utils/validators/albumValidator";
+import {Formik} from "formik";
 
 
 class LoginModal extends React.Component {
@@ -60,6 +62,50 @@ class LoginModal extends React.Component {
         return (
             <>
                 <Modal show={show} onHide={onClose}>
+                    <Formik
+                        onSubmit={editMode ? this.handleEditAlbum : this.handleAddNewAlbum}
+                        initialValues={{
+                            albumName: ''
+                        }}
+                        validate={validateAlbumForm}
+                    >
+                        {({
+                              handleSubmit,
+                              handleChange,
+                              handleBlur,
+                              values,
+                              touched,
+                              isValid,
+                              errors,
+                          }) => (
+                            <Form noValidate onSubmit={handleSubmit}>
+                                <Modal.Header closeButton>
+                                    {editMode ?
+                                        <Modal.Title>Редактирование</Modal.Title>:
+                                        <Modal.Title>Создание альбома</Modal.Title>
+                                    }
+                                </Modal.Header>
+                                <Modal.Body>
+                                    <Form.Group as={Row} controlId="formAlbumTitle">
+                                        <Form.Label column sm="2">Название</Form.Label>
+                                        <Col sm="10">
+                                            <Form.Control type="text"
+                                                          name='albumName'
+                                                          value={values.albumName}
+                                                          isInvalid={errors.albumName}
+                                                          onChange={handleChange}/>
+                                            <Form.Control.Feedback type="invalid">
+                                                Это поле обязательное
+                                            </Form.Control.Feedback>
+                                        </Col>
+                                    </Form.Group>
+                                </Modal.Body>
+                                <Modal.Footer>
+                                    <Button type="submit" variant="primary">Ок</Button>
+                                </Modal.Footer>
+                            </Form>
+                        )}
+                    </Formik>
                     <Modal.Header closeButton>
                         <Modal.Title>Вход</Modal.Title>
                     </Modal.Header>
