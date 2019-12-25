@@ -21,6 +21,14 @@ export function getAlbums() {
     }
 }
 
+export function createAlbum(data) {
+    return {
+        type: ActionTypes.CREATE_ALBUM_REQUEST,
+        payload: data,
+    }
+}
+
+
 export function setCurrentAlbum(albumId) {
     return {
         type: ActionTypes.SET_CURRENT_ALBUM,

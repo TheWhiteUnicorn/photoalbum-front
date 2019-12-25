@@ -1,6 +1,8 @@
-import React from 'react'
+import React from 'react';
 import {Button, Modal, Form, Row, Col} from "react-bootstrap";
-import axios from "axios";
+
+import { createAlbum } from "../store/action/actions";
+import { connect } from "react-redux";
 
 class AddAlbumModal extends React.Component {
     constructor(props) {
@@ -18,20 +20,22 @@ class AddAlbumModal extends React.Component {
         });
     };
 
-    handleAddNewAlbum = () => {
+    handleAddNewAlbum = async () => {
         let albumName = this.state.albumName.replace(/^\s+|\s+$/g, '');
-        console.log(albumName,4564654);
+        const { createAlbum }= this.state;
         if(albumName.length) {
             this.setState({
                 nameError: false,
             });
-            // axios.post('/rest-auth/registration/', {
-            //     username: userName,
-            //     password1: pass1,
-            //     password2: pass2,
-            // }).then((response) => console.log(response));
-            this.props.onClose();
-            this.setState( { albumName: ''});
+
+            try {
+                await createAlbum(albumName);
+                this.props.onClose();
+                this.setState( { albumName: ''});
+            } catch {
+                alert('Не удалось создать альбом');
+            }
+
         } else {
             this.setState({
                 nameError: true,
@@ -72,4 +76,18 @@ render() {
 
 }
 
-export default AddAlbumModal
+
+
+function mapStateToProps (state) {
+    return {
+        keyUser: state.saveUserInfoReducer.key,
+    };
+}
+
+
+const mapDispatchToProps = {
+    createAlbum,
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddAlbumModal);

@@ -1,22 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="732a8e64-e2cd-4382-b509-43d50d7b940e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/loginUserModal.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/store/sagas/logoutSaga.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/regUserModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/regUserModal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/home.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/action/actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/action/actions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/constants/actions-types.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/constants/actions-types.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/reducers/getUserReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/reducers/getUserReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/reducers/postRegistrReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/reducers/postRegistrReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/reducers/reducers.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/reducers/reducers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/sagas/getUserSaga.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/sagas/getUserSaga.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/sagas/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/sagas/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/sagas/registrationSaga.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/sagas/registrationSaga.js" afterDir="false" />
-    </list>
+    <list default="true" id="732a8e64-e2cd-4382-b509-43d50d7b940e" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -103,7 +88,7 @@
       <workItem from="1576770154067" duration="3825000" />
       <workItem from="1576799115313" duration="319000" />
       <workItem from="1576799831426" duration="27618000" />
-      <workItem from="1577201752448" duration="16599000" />
+      <workItem from="1577201752448" duration="19642000" />
     </task>
     <task id="LOCAL-00001" summary="planed">
       <created>1576925502367</created>
@@ -119,7 +104,21 @@
       <option name="project" value="LOCAL" />
       <updated>1577205099785</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="autentificat">
+      <created>1577230417646</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1577230417646</updated>
+    </task>
+    <task id="LOCAL-00004" summary="add saga for crete album">
+      <created>1577234216312</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1577234216312</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -128,7 +127,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="some feature for card and validation like a shit" />
     <MESSAGE value="planed" />
-    <option name="LAST_COMMIT_MESSAGE" value="planed" />
+    <MESSAGE value="autentificat" />
+    <MESSAGE value="add saga for crete album" />
+    <option name="LAST_COMMIT_MESSAGE" value="add saga for crete album" />
   </component>
   <component name="WindowStateProjectService">
     <state x="275" y="23" key="#ESLint" timestamp="1577202020261">
@@ -139,48 +140,52 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="402" y="63" key="#npm_start/0.0.1366.728@0.0.1366.728" timestamp="1576800769200" />
-    <state x="214" y="75" width="949" height="567" key="CommitChangelistDialog2" timestamp="1577205096608">
+    <state x="214" y="75" width="949" height="567" key="CommitChangelistDialog2" timestamp="1577234603536">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="214" y="75" width="949" height="567" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1577205096608" />
+    <state x="214" y="75" width="949" height="567" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1577234603536" />
     <state x="558" y="136" width="860" height="805" key="CommitChangelistDialog2/67.27.3133.1053@67.27.3133.1053" timestamp="1576797621559" />
-    <state width="1345" height="93" key="GridCell.Tab.0.bottom" timestamp="1577229579316">
+    <state x="135" y="55" key="DiffContextDialog" timestamp="1577234180895">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="93" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1577229579316" />
+    <state x="135" y="55" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1577234180895" />
+    <state width="1345" height="373" key="GridCell.Tab.0.bottom" timestamp="1577234388253">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1345" height="373" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1577234388253" />
     <state width="1830" height="287" key="GridCell.Tab.0.bottom/1920.0.1280.1024/67.27.1853.1053@67.27.1853.1053" timestamp="1576761467388" />
-    <state width="1345" height="93" key="GridCell.Tab.0.center" timestamp="1577229579315">
+    <state width="1345" height="373" key="GridCell.Tab.0.center" timestamp="1577234388252">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="93" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1577229579315" />
+    <state width="1345" height="373" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1577234388252" />
     <state width="1830" height="287" key="GridCell.Tab.0.center/1920.0.1280.1024/67.27.1853.1053@67.27.1853.1053" timestamp="1576761467387" />
-    <state width="1345" height="93" key="GridCell.Tab.0.left" timestamp="1577229579315">
+    <state width="1345" height="373" key="GridCell.Tab.0.left" timestamp="1577234388252">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="93" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1577229579315" />
+    <state width="1345" height="373" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1577234388252" />
     <state width="1830" height="287" key="GridCell.Tab.0.left/1920.0.1280.1024/67.27.1853.1053@67.27.1853.1053" timestamp="1576761467386" />
-    <state width="1345" height="93" key="GridCell.Tab.0.right" timestamp="1577229579315">
+    <state width="1345" height="373" key="GridCell.Tab.0.right" timestamp="1577234388252">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="93" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1577229579315" />
+    <state width="1345" height="373" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1577234388252" />
     <state width="1830" height="287" key="GridCell.Tab.0.right/1920.0.1280.1024/67.27.1853.1053@67.27.1853.1053" timestamp="1576761467387" />
     <state x="461" y="75" key="RollbackChangesDialog" timestamp="1576860755494">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="461" y="75" key="RollbackChangesDialog/0.0.1366.728@0.0.1366.728" timestamp="1576860755494" />
-    <state x="227" y="172" width="487" height="364" key="Vcs.Push.Dialog.v2" timestamp="1577205132776">
+    <state x="227" y="172" width="487" height="364" key="Vcs.Push.Dialog.v2" timestamp="1577234377183">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="227" y="172" width="487" height="364" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1577205132776" />
+    <state x="227" y="172" width="487" height="364" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1577234377183" />
     <state x="588" y="276" width="800" height="526" key="Vcs.Push.Dialog.v2/67.27.3133.1053@67.27.3133.1053" timestamp="1576792278636" />
     <state x="380" y="0" width="606" height="728" key="find.popup" timestamp="1577217089468">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="380" y="0" width="606" height="728" key="find.popup/0.0.1366.728@0.0.1366.728" timestamp="1577217089468" />
-    <state x="365" y="156" key="git4idea.merge.GitPullDialog" timestamp="1577205111917">
+    <state x="365" y="156" key="git4idea.merge.GitPullDialog" timestamp="1577234223471">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="365" y="156" key="git4idea.merge.GitPullDialog/0.0.1366.728@0.0.1366.728" timestamp="1577205111917" />
+    <state x="365" y="156" key="git4idea.merge.GitPullDialog/0.0.1366.728@0.0.1366.728" timestamp="1577234223471" />
     <state x="324" y="90" width="700" height="530" key="recent.locations.popup" timestamp="1576805390272">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
