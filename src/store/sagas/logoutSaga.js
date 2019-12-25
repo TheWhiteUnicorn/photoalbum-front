@@ -12,11 +12,10 @@ export default function* watcherSaga() {
 }
 
 function* workerSaga(action) {
-    console.log(action.payload, 8787987987987989);
     const config = {
         method: 'POST',
         url: `${baseUrl}rest-auth/logout/`,
-        headers: { Authorization: `Token ${action.payload}` },
+        headers: { Authorization: `Token ${action.payload}`},
     };
     const { data } = yield call(axios, config);
     localStorage.setItem('key', null);

@@ -16,7 +16,7 @@ class Album extends React.Component {
         const {setCurrentAlbum, getAlbums, getAlbumPhotos, match: {params: id}} = this.props;
         setCurrentAlbum(id);
         getAlbums();
-        getAlbumPhotos();
+        getAlbumPhotos(id);
     }
 
     onAddPhoto = () => this.setState({showAddPhotoModal: true});

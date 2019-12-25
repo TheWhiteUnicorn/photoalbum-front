@@ -14,7 +14,13 @@ export default function* watcherSaga() {
 function* fetchAlbums() {
     try {
         const url = `${baseUrl}albums/`;
-        const payload = yield call(axios.get, url);
+        const token = localStorage.getItem('key');
+        const config = {
+            url,
+            method: 'GET',
+            headers: { Authorization: `Token ${token}`},
+        };
+        const payload = yield call(axios, config);
         yield put({type: ActionTypes.GET_ALBUMS_RESPONSE, status: RESPONSE_STATUSES.SUCCESS, payload});
     } catch (e) {
         yield put({type: ActionTypes.GET_ALBUMS_RESPONSE, status: RESPONSE_STATUSES.FAIL, message: e.message});
