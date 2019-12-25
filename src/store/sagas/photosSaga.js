@@ -27,24 +27,25 @@ function* fetchPhotos(action) {
 
 
 function* createPhotos(action) {
+    const id = action.payload.currentAlbum;
     console.log('this is action form me',action.payload);
+    const data = new FormData();
+    data.append('image', action.payload.image);
+    data.append('name', action.payload.name);
+    data.append('album', action.payload.currentAlbum);
     try {
         let url = `${baseUrl}photos/`;
         const token = localStorage.getItem('key');
         const config = {
             method: 'POST',
             url,
-            headers: token && { Authorization: `Token ${token}`},
-            data: {
-                name: action.payload.name,
-                image: action.payload.image,
-                album: action.payload.currentAlbum,
-            }
+            headers: token && { Authorization: `Token ${token}`, 'Content-Type': 'multipart/form-data'},
+            data: data
         };
 
         const payload = yield call(axios, config);
         yield put({type: ActionTypes.CREATE_PHOTO_RESPONSE, status: RESPONSE_STATUSES.SUCCESS, payload});
-        yield put({ type: ActionTypes.GET_PHOTOS_REQUEST, mode: PHOTO_FETCH_MODE.ALL});
+        yield put({ type: ActionTypes.GET_PHOTOS_REQUEST, mode: PHOTO_FETCH_MODE.ALBUM, albumId: Number(id)});
     } catch (e) {
         yield put({type: ActionTypes.CREATE_PHOTO_RESPONSE, status: RESPONSE_STATUSES.FAIL, message: e.message});
     }
