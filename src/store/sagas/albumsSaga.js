@@ -10,6 +10,7 @@ export default function* watcherSaga() {
     yield takeEvery(ActionTypes.GET_ALBUMS_REQUEST, fetchAlbums);
     yield takeEvery(ActionTypes.CREATE_ALBUM_REQUEST, createAlbum);
     yield takeEvery(ActionTypes.DELETE_ALBUM_REQUEST, deleteAlbum);
+    yield takeEvery(ActionTypes.EDIT_ALBUM_REQUEST, editAlbum);
 }
 
 
@@ -62,7 +63,33 @@ function* deleteAlbum(action) {
         };
         const payload = yield call(axios, config);
         yield put({type: ActionTypes.DELETE_ALBUM_RESPONSE, status: RESPONSE_STATUSES.SUCCESS, payload});
+        yield put({type: ActionTypes.GET_ALBUMS_REQUEST});
     } catch (e) {
         yield put({type: ActionTypes.DELETE_ALBUM_RESPONSE, status: RESPONSE_STATUSES.FAIL, message: e.message});
     }
 }
+
+
+function* editAlbum(action) {
+    console.log(action);
+
+    try {
+        const url = `${baseUrl}albums/${action.payload.id}`;
+        const token = localStorage.getItem('key');
+        const config = {
+            url,
+            method: 'UPDATE',
+            headers: token && { Authorization: `Token ${token}`},
+            data: {
+                name: action.payload.name,
+                password: action.payload.pass1,
+            }
+        };
+        const payload = yield call(axios, config);
+        yield put({type: ActionTypes.EDIT_ALBUM_RESPONSE, status: RESPONSE_STATUSES.SUCCESS, payload});
+        yield put({type: ActionTypes.GET_ALBUMS_REQUEST});
+    } catch (e) {
+        yield put({type: ActionTypes.EDIT_ALBUM_RESPONSE, status: RESPONSE_STATUSES.FAIL, message: e.message});
+    }
+}
+
