@@ -7,9 +7,9 @@ class Comment extends React.Component {
         const {data} = this.props;
         console.log(data);
         return (<div>
-            <Container className='comment-container rounded'>
+            <Container className='comment-container'>
                 <Row className='justify-content-start align-items-center comment-head'>
-                    <Col xs={1} className={'mh-1'}>
+                    <Col xs={'auto'} className={'mh-1'}>
                         <Image
                         className='user-avatar-comment'
                         src='https://greendestinations.org/wp-content/uploads/2019/05/avatar-exemple.jpg'
