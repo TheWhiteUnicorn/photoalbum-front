@@ -1,12 +1,12 @@
 export const validateLoginForm = values => {
     const errors = {};
 
-    if (!values.login) {
-        errors.login = 'Это поле обязательное';
+    if (!values.userName) {
+        errors.userName = 'Это поле обязательное';
     }
 
-    if (!values.password) {
-        errors.password = 'Это поле обязательное';
+    if (!values.pass1) {
+        errors.pass1 = 'Это поле обязательное';
     }
 
     return errors;

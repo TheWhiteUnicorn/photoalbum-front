@@ -17,7 +17,7 @@ function* fetchPhotos(action) {
     try {
         let url;
         if (action.mode === PHOTO_FETCH_MODE.ALL) url = `${baseUrl}photos/`;
-        else if (action.mode === PHOTO_FETCH_MODE.ALBUM) url = `${baseUrl}photos/`;
+        else if (action.mode === PHOTO_FETCH_MODE.ALBUM) url = `${baseUrl}photos/?album=${action.albumId}`;
         const payload = yield call(axios.get, url);
         yield put({type: ActionTypes.GET_PHOTOS_RESPONSE, status: RESPONSE_STATUSES.SUCCESS, payload});
     } catch (e) {
