@@ -41,7 +41,7 @@ class Album extends React.Component {
                         <Col xs='auto'>{currentAlbum && currentAlbum.name}</Col>
                     </Row>
                     <Row>
-                        <PhotosList/>
+                        <PhotosList photos={photos}/>
                     </Row>
                 </Container>
             </div>
@@ -57,7 +57,7 @@ function mapStateToProps (state) {
     return {
         userInfo: state.getUserInfoReducer,
         currentAlbum: currentAlbum,
-        photos: state.photos,
+        photos: state.photos.photos,
     };
 }
 
