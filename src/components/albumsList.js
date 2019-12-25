@@ -8,6 +8,7 @@ import IconButton from "@material-ui/core/IconButton";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
+
 import {getAlbums, getUser} from "../store/action/actions";
 import {connect} from "react-redux";
 
@@ -28,16 +29,18 @@ class AlbumsList extends React.Component {
     }
 
     handleClick = event => {
+        console.log(event);
         this.setState({
             anchorEl: event.currentTarget,
             open: event.currentTarget,
         });
+
     };
 
     handleClose = () => {
         this.setState({
             anchorEl: null,
-            open: null,
+            open: false,
         });
     };
 
@@ -52,23 +55,27 @@ class AlbumsList extends React.Component {
                     {albums && albums.map((album)=>(
                             <Card onClick={onCardClick}>
                                 <Link to={`/albums/${album.id}`}>
-                                    <Card.Img variant="top" src={album.cover ? album.cover : 'https://semantic-ui.com/images/wireframe/image.png'}/>
+                                    <Card.Img
+                                        variant="top"
+                                        src={album.cover ? album.cover : 'https://semantic-ui.com/images/wireframe/image.png'}
+                                    />
                                 </Link>
                                 <Card.Body className='card_name'>
                                     <Link to={`/albums/${album.id}`}>
                                         <Card.Title>{album.name}</Card.Title>
                                     </Link>
-                                    {album.owned_by_current && <div>
+                                    {album.owned_by_current &&
+                                    <div>
                                         <IconButton
                                             aria-label="more"
-                                            aria-controls="long-menu"
+                                            aria-controls={`long-menu${album.id}`}
                                             aria-haspopup="true"
                                             onClick={this.handleClick}
                                         >
                                             <MoreVertIcon />
                                         </IconButton>
                                         <Menu
-                                            id="long-menu"
+                                            id={`long-menu${album.id}`}
                                             anchorEl={anchorEl}
                                             keepMounted
                                             open={open}
@@ -81,7 +88,10 @@ class AlbumsList extends React.Component {
                                             }}
                                         >
                                             {options.map(option => (
-                                                <MenuItem key={option} selected={option === 'Редактировать'} onClick={this.handleClose}>
+                                                <MenuItem
+                                                    key={option}
+                                                    // selected={option === 'Редактировать'}
+                                                    onClick={this.handleClick}>
                                                     {option}
                                                 </MenuItem>
                                             ))}

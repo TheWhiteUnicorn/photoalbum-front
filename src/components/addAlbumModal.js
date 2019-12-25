@@ -22,13 +22,13 @@ class AddAlbumModal extends React.Component {
 
     handleAddNewAlbum = async () => {
         let albumName = this.state.albumName.replace(/^\s+|\s+$/g, '');
-        const { createAlbum }= this.state;
+        const { createAlbum } = this.props;
         if(albumName.length) {
             this.setState({
                 nameError: false,
             });
-
             try {
+                console.log(albumName, 8888888);
                 await createAlbum(albumName);
                 this.props.onClose();
                 this.setState( { albumName: ''});
