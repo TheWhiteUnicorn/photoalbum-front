@@ -22,6 +22,29 @@ class Photo extends React.Component {
         });
     };
 
+    /*handleAddComment = async () => {
+        let albumName = this.state.newComment.replace(/^\s+|\s+$/g, '');
+        const { createComment } = this.state;
+        if(albumName.length) {
+            this.setState({
+                nameError: false,
+            });
+
+            try {
+                await createAlbum(albumName);
+                this.props.onClose();
+                this.setState( { albumName: ''});
+            } catch {
+                alert('Не удалось создать альбом');
+            }
+
+        } else {
+            this.setState({
+                nameError: true,
+            })
+        }
+    };*/
+
     render() {
         const {currentPhoto} = this.props;
         const {newComment} = this.state;
@@ -47,7 +70,7 @@ class Photo extends React.Component {
                             <Form.Control type="text" name='newComment' value={newComment} onChange={this.handleChangeInput}/>
                         </Col>
                         <Col sm="3">
-                            <Button variant="primary" type="submit">
+                            <Button variant="primary" type="submit" onClick={this.handleAddComment}>
                                 Отправить
                             </Button>
                         </Col>

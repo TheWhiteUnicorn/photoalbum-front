@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="732a8e64-e2cd-4382-b509-43d50d7b940e" name="Default Changelist" comment="interim commit">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/comment.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/comment.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/album.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/album.js" afterDir="false" />
+    <list default="true" id="732a8e64-e2cd-4382-b509-43d50d7b940e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/src/screens/photo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/photo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/action/actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/action/actions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/store/reducers/albums.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/reducers/albums.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/reducers/photos.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/reducers/photos.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/sagas/albumsSaga.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/sagas/albumsSaga.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,7 +135,14 @@
       <option name="project" value="LOCAL" />
       <updated>1577234924890</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="such cool stuff">
+      <created>1577240708246</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1577240708246</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -161,7 +164,8 @@
     <MESSAGE value="planed" />
     <MESSAGE value="patch" />
     <MESSAGE value="interim commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="interim commit" />
+    <MESSAGE value="such cool stuff" />
+    <option name="LAST_COMMIT_MESSAGE" value="such cool stuff" />
   </component>
   <component name="WindowStateProjectService">
     <state x="275" y="23" key="#ESLint" timestamp="1577202020261">
@@ -172,11 +176,11 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="402" y="63" key="#npm_start/0.0.1366.728@0.0.1366.728" timestamp="1576800769200" />
-    <state x="357" y="135" width="887" height="811" key="CommitChangelistDialog2" timestamp="1577237988002">
+    <state x="357" y="135" width="887" height="811" key="CommitChangelistDialog2" timestamp="1577240707687">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="214" y="75" width="949" height="567" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1577205096608" />
-    <state x="357" y="135" width="887" height="811" key="CommitChangelistDialog2/1920.0.1280.1024/67.27.1853.1053@67.27.1853.1053" timestamp="1577237988002" />
+    <state x="357" y="135" width="887" height="811" key="CommitChangelistDialog2/1920.0.1280.1024/67.27.1853.1053@67.27.1853.1053" timestamp="1577240707687" />
     <state x="558" y="136" width="860" height="805" key="CommitChangelistDialog2/67.27.3133.1053@67.27.3133.1053" timestamp="1576797621559" />
     <state width="1830" height="325" key="GridCell.Tab.0.bottom" timestamp="1577234334825">
       <screen x="67" y="27" width="1853" height="1053" />
@@ -206,11 +210,11 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="461" y="75" key="RollbackChangesDialog/0.0.1366.728@0.0.1366.728" timestamp="1576860755494" />
-    <state x="375" y="276" width="800" height="550" key="Vcs.Push.Dialog.v2" timestamp="1577235856758">
+    <state x="375" y="276" width="800" height="550" key="Vcs.Push.Dialog.v2" timestamp="1577240709952">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state x="227" y="172" width="487" height="364" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1577205132776" />
-    <state x="375" y="276" width="800" height="550" key="Vcs.Push.Dialog.v2/1920.0.1280.1024/67.27.1853.1053@67.27.1853.1053" timestamp="1577235856758" />
+    <state x="375" y="276" width="800" height="550" key="Vcs.Push.Dialog.v2/1920.0.1280.1024/67.27.1853.1053@67.27.1853.1053" timestamp="1577240709952" />
     <state x="588" y="276" width="800" height="526" key="Vcs.Push.Dialog.v2/67.27.3133.1053@67.27.3133.1053" timestamp="1576792278636" />
     <state x="753" y="460" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1577234942966">
       <screen x="67" y="27" width="1853" height="1053" />

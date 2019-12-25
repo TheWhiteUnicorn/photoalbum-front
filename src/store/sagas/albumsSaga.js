@@ -20,7 +20,7 @@ function* fetchAlbums() {
         const config = {
             url,
             method: 'GET',
-            headers: { Authorization: `Token ${token}`},
+            headers: token && { Authorization: `Token ${token}`},
         };
         const payload = yield call(axios, config);
         yield put({type: ActionTypes.GET_ALBUMS_RESPONSE, status: RESPONSE_STATUSES.SUCCESS, payload});
