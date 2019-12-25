@@ -1,26 +1,42 @@
 import React from 'react'
-import {Button, Card, Col, Container, Form, Image, Row, ToggleButton, ToggleButtonGroup} from "react-bootstrap";
-import {Link} from "react-router-dom";
+import {Button, Card, Col, Container, Form, Image, Row} from "react-bootstrap";
 import Comment from "../components/comment";
+import {getPhotosAll, setCurrentPhoto} from "../store/action/actions";
+import {connect} from "react-redux";
 
 
 class Photo extends React.Component {
-    list = [1, 2, 3, 4, 5];
+    state = {
+        newComment: '',
+    };
+
+    componentDidMount() {
+        const {getPhotosAll, setCurrentPhoto, match: {params: {id}}} = this.props;
+        getPhotosAll();
+        setCurrentPhoto(id);
+    }
+
+    handleChangeInput = (e) => {
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+    };
 
     render() {
-        const {id} = this.props.match.params;
+        const {currentPhoto} = this.props;
+        const {newComment} = this.state;
 
         return (
             <div>
-                <Container>
-                    <h1 className='mb-5 mt-4'>{id}</h1>
+                {currentPhoto && <Container>
+                    <h1 className='mb-5 mt-4'>{currentPhoto.name}</h1>
                     <Image
                         className='photo-main mb-5'
-                        src='https://static.boredpanda.com/blog/wp-content/uploads/2019/02/sony-world-photography-awards-2019-14-5c61944526bfd__880.jpg'
+                        src={currentPhoto.image ? currentPhoto.image : 'https://semantic-ui.com/images/wireframe/image.png'}
                     />
                     <h3>Комментарии</h3>
-                    {this.list.map(()=>(
-                        <Comment/>
+                    {currentPhoto.comments && currentPhoto.comments.map((comment)=>(
+                        <Comment data={comment}/>
                     ))
                     }
                     <Form.Group as={Row} controlId="formPlaintextEmail">
@@ -28,7 +44,7 @@ class Photo extends React.Component {
                             Ваш комментарий
                         </Form.Label>
                         <Col sm="6">
-                            <Form.Control type="text"/>
+                            <Form.Control type="text" name='newComment' value={newComment} onChange={this.handleChangeInput}/>
                         </Col>
                         <Col sm="3">
                             <Button variant="primary" type="submit">
@@ -36,10 +52,26 @@ class Photo extends React.Component {
                             </Button>
                         </Col>
                     </Form.Group>
-                </Container>
+                </Container> }
             </div>
         )
     }
 }
 
-export default Photo;
+function mapStateToProps (state) {
+    let currentPhoto = null;
+    if (state.photos.photos && state.photos.currentPhoto)
+        currentPhoto = state.photos.photos.find((photo) => photo.id === state.photos.currentPhoto);
+    console.log(currentPhoto);
+    return {
+        userInfo: state.getUserInfoReducer,
+        currentPhoto,
+    };
+}
+
+const mapDispatchToProps = {
+    setCurrentPhoto,
+    getPhotosAll,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Photo);

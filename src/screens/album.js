@@ -38,7 +38,7 @@ class Album extends React.Component {
                         <Col>
                             <Button onClick={this.onAddPhoto}>Добавить фото</Button>
                         </Col>
-                        <Col xs='auto'>{currentAlbum && currentAlbum.name}</Col>
+                        <Col xs='auto'>Альбом: <b>{currentAlbum && currentAlbum.name}</b></Col>
                     </Row>
                     <Row>
                         <PhotosList photos={photos}/>

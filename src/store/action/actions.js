@@ -32,7 +32,7 @@ export function createAlbum(data) {
 export function setCurrentAlbum(albumId) {
     return {
         type: ActionTypes.SET_CURRENT_ALBUM,
-        albumId,
+        albumId: Number(albumId),
     }
 }
 
@@ -47,15 +47,14 @@ export function getAlbumPhotos(albumId) {
     return {
         type: ActionTypes.GET_PHOTOS_REQUEST,
         mode: PHOTO_FETCH_MODE.ALBUM,
-        albumId
+        albumId: Number(albumId),
     }
 }
 
-export function getPhotosAlbum(albumId) {
+export function setCurrentPhoto(photoId) {
     return {
-        type: ActionTypes.GET_PHOTOS_REQUEST,
-        mode: PHOTO_FETCH_MODE.ALBUM,
-        albumId
+        type: ActionTypes.SET_CURRENT_PHOTO,
+        photoId: Number(photoId)
     }
 }
 

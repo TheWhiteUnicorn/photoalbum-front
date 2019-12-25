@@ -12,7 +12,11 @@ const photos = (state = initialState, action) => {
             return {
                 ...state,
                 photos: action.payload.data,
-                currentPhoto: null,
+            };
+        case ActionTypes.SET_CURRENT_PHOTO:
+            return {
+                ...state,
+                currentPhoto: action.photoId,
             };
         default: return state;
     }

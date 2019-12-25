@@ -12,7 +12,6 @@ const albums = (state = initialState, action) => {
             return {
                 ...state,
                 albums: action.payload.data,
-                currentAlbum: Math.min(Math.max(state.currentAlbum, 0), action.payload.data.length),
             };
         case ActionTypes.SET_CURRENT_ALBUM:
             return {

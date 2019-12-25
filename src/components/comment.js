@@ -4,6 +4,8 @@ import {Button, Col, Container, Image, Row, ToggleButton, ToggleButtonGroup} fro
 
 class Comment extends React.Component {
     render() {
+        const {data} = this.props;
+        console.log(data);
         return (<div>
             <Container className='comment-container rounded'>
                 <Row className='justify-content-start align-items-center comment-head'>
@@ -13,11 +15,11 @@ class Comment extends React.Component {
                         src='https://greendestinations.org/wp-content/uploads/2019/05/avatar-exemple.jpg'
                         roundedCircle/>
                     </Col>
-                    <Col>Иванов Иван</Col>
+                    <Col>{data.creator.username}</Col>
                 </Row>
                 <Row className='comment-body'>
                     <Col>
-                        Классная фотка
+                        {data.text}
                     </Col>
                 </Row>
             </Container>
