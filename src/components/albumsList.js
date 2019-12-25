@@ -8,6 +8,10 @@ import IconButton from "@material-ui/core/IconButton";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
+import { deleteAlbum } from "../store/action/actions";
+import {connect} from "react-redux";
+import AddAlbumModal from "./addAlbumModal";
+
 
 const options = [
     'Удалить',
@@ -22,15 +26,30 @@ class AlbumsList extends React.Component {
         this.state = {
             anchorEl: null,
             open: false,
+            showAddAlbumModal: false,
         }
     }
 
     handleClick = (event, index) => {
-        console.log(index);
+        console.log(index, 54646465465, event.target.id);
         this.setState({
             anchorEl: event.currentTarget,
             open: event.currentTarget,
         });
+
+        switch (index) {
+            case 0:
+                const isAdmin = window.confirm("Удалить?");
+                if(isAdmin) {
+                    //this.props.deleteAlbum();
+                } else {
+                    return;
+                }
+                break;
+            case 1:
+                this.onAddAlbum();
+                break;
+        }
 
     };
 
@@ -41,6 +60,9 @@ class AlbumsList extends React.Component {
         });
     };
 
+    onCloseAddAlbumModal = () => this.setState({showAddAlbumModal: false});
+    onAddAlbum = () => this.setState({showAddAlbumModal: true});
+
 
     render() {
         const {onCardClick, albums} = this.props;
@@ -49,7 +71,7 @@ class AlbumsList extends React.Component {
         return (<div>
             <Container>
                 <CardColumns>
-                    {albums && albums.map((album)=>(
+                    {albums && albums.map((album, albomindex)=>(
                             <Card key={album.id} onClick={onCardClick}>
                                 <Link to={`/albums/${album.id}`}>
                                     <Card.Img
@@ -86,9 +108,12 @@ class AlbumsList extends React.Component {
                                         >
                                             {options.map((option, index) => (
                                                 <MenuItem
+                                                    id={album.id}
                                                     key={option}
                                                     // selected={option === 'Редактировать'}
-                                                    onClick={event => this.handleClick(event, index)}>
+                                                    onClick={event => this.handleClick(event, index)}
+                                                >
+
                                                     {option}
                                                 </MenuItem>
                                             ))}
@@ -100,8 +125,22 @@ class AlbumsList extends React.Component {
                     }
                 </CardColumns>
             </Container>
+            <AddAlbumModal show={this.state.showAddAlbumModal} editMode={true} onClose={this.onCloseAddAlbumModal}/>
         </div>)
     }
 }
 
-export default AlbumsList
+
+function mapStateToProps (state) {
+    return {
+        keyUser: state.saveUserInfoReducer.key,
+    };
+}
+
+
+const mapDispatchToProps = {
+    deleteAlbum,
+};
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(AlbumsList);

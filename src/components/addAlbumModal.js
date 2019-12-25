@@ -28,7 +28,6 @@ class AddAlbumModal extends React.Component {
                 nameError: false,
             });
             try {
-                console.log(albumName, 8888888);
                 await createAlbum(albumName);
                 this.props.onClose();
                 this.setState( { albumName: ''});
@@ -43,14 +42,21 @@ class AddAlbumModal extends React.Component {
         }
     };
 
+    handleEditAlbum = () => {
+      console.log('ЩАС ИЗМЕНЮ ИДИ НАХУЙ');
+    };
+
 render() {
-    const { show, onClose } = this.props;
+    const { show, onClose, editMode } = this.props;
     const { albumName } = this.state;
     return (
         <>
             <Modal show={show} onHide={onClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Создание альбома</Modal.Title>
+                    {editMode ?
+                        <Modal.Title>Редактирование</Modal.Title>:
+                        <Modal.Title>Создание альбома</Modal.Title>
+                    }
                 </Modal.Header>
                 <Modal.Body>
                     <Form.Group as={Row} controlId="formAlbumTitle">
@@ -65,9 +71,15 @@ render() {
                     </Form.Group>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="primary" onClick={this.handleAddNewAlbum}>
-                        Ок
-                    </Button>
+                    {editMode ?
+                        <Button variant="primary" onClick={this.handleEditAlbum}>
+                            Ок
+                        </Button>
+                        :
+                        <Button variant="primary" onClick={this.handleAddNewAlbum}>
+                            Ок
+                        </Button>
+                    }
                 </Modal.Footer>
             </Modal>
         </>

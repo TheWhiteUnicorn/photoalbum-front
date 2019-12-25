@@ -35,7 +35,7 @@ export function deleteAlbum(id) {
     }
 }
 
-export function deleteAlbum(data) {
+export function editAlbum(data) {
     return {
         type: ActionTypes.EDIT_ALBUM_REQUEST,
         payload: data,
