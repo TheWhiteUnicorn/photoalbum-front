@@ -13,7 +13,7 @@ class Album extends React.Component {
     };
 
     componentDidMount() {
-        const {setCurrentAlbum, getAlbums, getAlbumPhotos, match: {params: id}} = this.props;
+        const {setCurrentAlbum, getAlbums, getAlbumPhotos, match: {params: {id}}} = this.props;
         setCurrentAlbum(id);
         getAlbums();
         getAlbumPhotos(id);
@@ -23,7 +23,7 @@ class Album extends React.Component {
     onCloseAddPhotoModal = () => this.setState({showAddPhotoModal: false});
     
     render() {
-        const {id} = this.props.match.params;
+        const {currentAlbum, photos} = this.props;
 
         return (<>
             <div>
@@ -38,7 +38,7 @@ class Album extends React.Component {
                         <Col>
                             <Button onClick={this.onAddPhoto}>Добавить фото</Button>
                         </Col>
-                        <Col xs='auto'>Название альбома {id}</Col>
+                        <Col xs='auto'>{currentAlbum && currentAlbum.name}</Col>
                     </Row>
                     <Row>
                         <PhotosList/>
@@ -51,9 +51,12 @@ class Album extends React.Component {
 }
 
 function mapStateToProps (state) {
+    let currentAlbum = null;
+    if (state.albums.albums && state.albums.currentAlbum)
+        currentAlbum = state.albums.albums.find((album) => album.id === state.albums.currentAlbum);
     return {
         userInfo: state.getUserInfoReducer,
-        albums: state.albums,
+        currentAlbum: currentAlbum,
         photos: state.photos,
     };
 }

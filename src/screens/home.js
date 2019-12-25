@@ -85,7 +85,7 @@ class Home extends React.Component {
 
     render() {
         const {displayMode, menu} = this.state;
-        const {albums: {albums}, photos: {photos}, userInfo} = this.props;
+        const {albums, photos, userInfo} = this.props;
 
         return (
             <div>
@@ -150,8 +150,8 @@ function mapStateToProps (state) {
     return {
         userInfo: state.getUserInfoReducer.userInfo,
         keyUser: state.saveUserInfoReducer.key,
-        albums: state.albums,
-        photos: state.photos,
+        albums: state.albums.albums,
+        photos: state.photos.photos,
     };
 }
 
