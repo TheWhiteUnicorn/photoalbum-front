@@ -15,7 +15,6 @@ export default function* watcherSaga() {
 }
 
 function* workerSaga(action) {
-    console.log(action.payload);
     const config = {
         method: 'POST',
         url: `${baseUrl}rest-auth/registration/`,
@@ -26,7 +25,6 @@ function* workerSaga(action) {
         }
     };
     const {data} = yield call(axios, config);
-    console.log(data, 9876564321);
     localStorage.setItem('key', data.key);
     yield  put({type: POST_USER_SUCCESS, payload: data});
 }

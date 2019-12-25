@@ -8,22 +8,21 @@ const initialState = {
 
 
 const albums = (state = initialState, action) => {
-    if (action.status === RESPONSE_STATUSES.SUCCESS)
-        switch (action.type) {
-            case ActionTypes.GET_ALBUMS_RESPONSE:
+    switch (action.type) {
+        case ActionTypes.GET_ALBUMS_RESPONSE:
+            if (action.status === RESPONSE_STATUSES.SUCCESS) {
                 return {
                     ...state,
                     albums: action.payload.data,
-                };
-            case ActionTypes.SET_CURRENT_ALBUM:
-                return {
-                    ...state,
-                    currentAlbum: action.albumId,
-                };
-            default: return state;
-        }
-    else
-        return state
+                }
+            } else return state;
+        case ActionTypes.SET_CURRENT_ALBUM:
+            return {
+                ...state,
+                currentAlbum: action.albumId,
+            };
+        default: return state;
+    }
 };
 
 export default albums;
